@@ -38,6 +38,35 @@ This multithreaded design offers several advantages:
 2. ARP Cache Poisoning Detection: Tracks ARP responses to identify potential cache poisoning attempts.
 3. Blacklisted URL Detection: Checks for access to predefined blacklisted URLs (currently set to www.google.co.uk and www.bbc.co.uk for demonstration purposes).
 
+## Prerequisites
+To build and run this project, you need:
+
+GCC compiler
+libpcap development files
+POSIX threads library
+
+On Ubuntu or Debian-based systems, you can install these with:
+Copysudo apt-get install build-essential libpcap-dev
+Building the Project
+The project includes a Makefile for easy compilation. To build the project, run:
+Copymake
+This will compile all source files and create an executable named ids (or whatever name is specified in the Makefile).
+To clean the build files:
+Copymake clean
+Running the Intrusion Detection System
+To run the IDS, use the following command:
+Copysudo ./ids [OPTIONS]
+The program requires root privileges to capture packets.
+Command-line Options
+Refer to main.c for the exact command-line options available. Common options might include:
+
+Specifying the network interface to monitor
+Enabling verbose mode for debugging
+Setting the number of worker threads
+
+Example:
+Copysudo ./ids -i eth0 -v
+
 ## Output
 
 The program will display real-time alerts for detected intrusions. When interrupted (e.g., with Ctrl+C), it will print a summary report of detected threats.
