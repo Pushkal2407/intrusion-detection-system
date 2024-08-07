@@ -43,21 +43,25 @@ To build and run this project, you need:
 - POSIX threads library
 
 On Ubuntu or Debian-based systems, you can install these with:
-sudo apt-get install build-essential libpcap-dev
+
+`sudo apt-get install build-essential libpcap-dev`
 
 ## Building the Project
 
 The project includes a Makefile for easy compilation. To build the project, run:
-make
+
+`make`
 This will compile all source files and create an executable named `idsniff`.
 
 To clean the build files:
-make clean
+`make clean`
 
 ## Running the Intrusion Detection System
 
 To run the IDS, use the following command:
-sudo ./idsniff [OPTIONS]
+
+`sudo ./idsniff [OPTIONS]`
+
 The program requires root privileges to capture packets.
 
 ### Command-line Options
@@ -66,7 +70,8 @@ Refer to `main.c` for the exact command-line options available. Common options i
 - `-i [interface]`: Specify the network interface to monitor
 - `-v`: Enable verbose mode for debugging
 
-Example: sudo ./idsniff -i eth0 -v
+Example: 
+`sudo ./idsniff -i eth0 -v`
 
 ## Output
 
