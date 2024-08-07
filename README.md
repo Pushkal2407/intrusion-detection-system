@@ -17,14 +17,11 @@ The system consists of several interconnected modules:
 This IDS utilizes a multithreaded architecture to efficiently process network packets:
 
 1. **Main Thread**: Handles packet capture (in `sniff.c`). It captures packets from the network interface and dispatches them to worker threads.
-
 2. **Worker Threads**: Multiple worker threads (defined in `dispatch.c`, default is 10) process packets concurrently. Each worker thread:
    - Retrieves packets from the shared queue
    - Performs analysis on each packet
    - Updates shared data structures with results
-
 3. **Thread-Safe Queue**: Implemented in `pqueue.c`, this queue allows safe communication between the main thread and worker threads. It uses mutex locks and condition variables to ensure thread-safety.
-
 4. **Synchronization**: The system uses various mutex locks (in `analysis.c`) to protect shared data structures and ensure thread-safe updates of detection statistics.
 
 This multithreaded design offers several advantages:
@@ -39,41 +36,45 @@ This multithreaded design offers several advantages:
 3. Blacklisted URL Detection: Checks for access to predefined blacklisted URLs (currently set to www.google.co.uk and www.bbc.co.uk for demonstration purposes).
 
 ## Prerequisites
-To build and run this project, you need:
 
-GCC compiler
-libpcap development files
-POSIX threads library
+To build and run this project, you need:
+- GCC compiler
+- libpcap development files
+- POSIX threads library
 
 On Ubuntu or Debian-based systems, you can install these with:
-Copysudo apt-get install build-essential libpcap-dev
-Building the Project
+sudo apt-get install build-essential libpcap-dev
+
+## Building the Project
+
 The project includes a Makefile for easy compilation. To build the project, run:
-Copymake
-This will compile all source files and create an executable named ids (or whatever name is specified in the Makefile).
+make
+This will compile all source files and create an executable named `idsniff`.
+
 To clean the build files:
-Copymake clean
-Running the Intrusion Detection System
+make clean
+
+## Running the Intrusion Detection System
+
 To run the IDS, use the following command:
-Copysudo ./ids [OPTIONS]
+sudo ./idsniff [OPTIONS]
 The program requires root privileges to capture packets.
-Command-line Options
-Refer to main.c for the exact command-line options available. Common options might include:
 
-Specifying the network interface to monitor
-Enabling verbose mode for debugging
-Setting the number of worker threads
+### Command-line Options
 
-Example:
-Copysudo ./ids -i eth0 -v
+Refer to `main.c` for the exact command-line options available. Common options include:
+- `-i [interface]`: Specify the network interface to monitor
+- `-v`: Enable verbose mode for debugging
+
+Example: sudo ./idsniff -i eth0 -v
 
 ## Output
 
-The program will display real-time alerts for detected intrusions. When interrupted (e.g., with Ctrl+C), it will print a summary report of detected threats.
+The program displays real-time alerts for detected intrusions. When interrupted (e.g., with Ctrl+C), it prints a summary report of detected threats.
 
 ## Limitations and Future Improvements
 
-- The number of worker threads is currently fixed. Future versions could make this configurable or dynamically adjustable based on  system load.
+- The number of worker threads is currently fixed. Future versions could make this configurable or dynamically adjustable based on system load.
 - Packet processing is relatively simple. More sophisticated analysis techniques could be implemented for better threat detection.
 - While multithreading improves performance, very high traffic volumes might still overwhelm the system. Future versions could implement more advanced load balancing or packet sampling techniques.
 
