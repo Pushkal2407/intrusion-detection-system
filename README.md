@@ -48,6 +48,3 @@ The program will display real-time alerts for detected intrusions. When interrup
 - Packet processing is relatively simple. More sophisticated analysis techniques could be implemented for better threat detection.
 - While multithreading improves performance, very high traffic volumes might still overwhelm the system. Future versions could implement more advanced load balancing or packet sampling techniques.
 
-## License
-
-This project is open-source and available under the MIT License.
