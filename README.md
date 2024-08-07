@@ -66,7 +66,7 @@ The program requires root privileges to capture packets.
 
 ### Command-line Options
 
-Refer to `main.c` for the exact command-line options available. Common options include:
+Refer to `main.c` for the command-line options available. Options include:
 - `-i [interface]`: Specify the network interface to monitor
 - `-v`: Enable verbose mode for debugging
 
